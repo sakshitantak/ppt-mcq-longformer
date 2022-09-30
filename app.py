@@ -21,11 +21,9 @@ def clean_text(text):
 
 if 'file' not in st.session_state:
     st.session_state['file'] = st.file_uploader('Upload ppt')
-
-    if st.session_state['file'] is not None:
-        with open('data/tmp.pptx', 'wb') as f:
-            f.write(st.session_state['file'].getbuffer())
-        f.close()
+    with open('data/tmp.pptx', 'wb') as f:
+        f.write(st.session_state['file'].getbuffer())
+    f.close()
 else:
     text = tp.process('data/tmp.pptx', input_encoding='utf-8').decode()
     text = clean_text(text)
