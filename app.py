@@ -23,10 +23,10 @@ if 'file' not in st.session_state:
     st.session_state['file'] = st.sidebar.file_uploader('Upload ppt')
 
     if st.session_state['file'] is not None:
-        with open('ppt_qa/uploaded_files/tmp.pptx', 'wb') as f:
+        with open('data/tmp.pptx', 'wb') as f:
             f.write(st.session_state['file'].getbuffer())
         f.close()
-    st.session_state['text'] = tp.process('ppt_qa/uploaded_files/tmp.pptx', input_encoding='utf-8').decode()
+    st.session_state['text'] = tp.process('data/tmp.pptx', input_encoding='utf-8').decode()
     st.session_state['text'] = clean_text(st.session_state['text'])
 
 else:
