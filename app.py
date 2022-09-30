@@ -21,11 +21,12 @@ def clean_text(text):
 
 if 'file' not in st.session_state:
     st.session_state['file'] = st.file_uploader('Upload ppt')
-    with open('data/tmp.pptx', 'wb') as f:
+    with open('tmp.pptx', 'wb') as f:
         f.write(st.session_state['file'].getbuffer())
     f.close()
 else:
-    text = tp.process('data/tmp.pptx', input_encoding='utf-8').decode()
+    text = tp.process()
+    text = tp.process('tmp.pptx', input_encoding='utf-8').decode()
     text = clean_text(text)
     print(f'i = {st.session_state.i}')
     for i, choice in enumerate(st.session_state.choices):
