@@ -20,16 +20,15 @@ def clean_text(text):
     return text
 
 if 'file' not in st.session_state:
-    st.session_state['file'] = st.sidebar.file_uploader('Upload ppt')
+    st.session_state['file'] = st.file_uploader('Upload ppt')
 
     if st.session_state['file'] is not None:
         with open('data/tmp.pptx', 'wb') as f:
             f.write(st.session_state['file'].getbuffer())
         f.close()
-        st.session_state['text'] = tp.process('data/tmp.pptx', input_encoding='utf-8').decode()
-        st.session_state['text'] = clean_text(st.session_state['text'])
-
 else:
+    text = tp.process('data/tmp.pptx', input_encoding='utf-8').decode()
+    text = clean_text(text)
     print(f'i = {st.session_state.i}')
     for i, choice in enumerate(st.session_state.choices):
         col1, col2 = st.columns(2)
@@ -53,5 +52,5 @@ else:
                 st.session_state['model'] = QuestionAnsweringModel()
         st.success('Model Loaded successfully!')
         with st.spinner('Finding the best answer ...'):
-            answer = st.session_state['model'].get_answer(st.session_state['text'], st.session_state.choices)
+            answer = st.session_state['model'].get_answer(text, st.session_state.choices)
         st.success(f'Choice{answer} : {st.session_state["choices"][answer]}')
