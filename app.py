@@ -26,8 +26,8 @@ if 'file' not in st.session_state:
         with open('data/tmp.pptx', 'wb') as f:
             f.write(st.session_state['file'].getbuffer())
         f.close()
-    st.session_state['text'] = tp.process('data/tmp.pptx', input_encoding='utf-8').decode()
-    st.session_state['text'] = clean_text(st.session_state['text'])
+        st.session_state['text'] = tp.process('data/tmp.pptx', input_encoding='utf-8').decode()
+        st.session_state['text'] = clean_text(st.session_state['text'])
 
 else:
     print(f'i = {st.session_state.i}')
