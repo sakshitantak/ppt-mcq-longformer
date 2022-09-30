@@ -25,7 +25,6 @@ if 'file' not in st.session_state:
         f.write(st.session_state['file'].getbuffer())
     f.close()
 else:
-    text = tp.process()
     text = tp.process('tmp.pptx', input_encoding='utf-8').decode()
     text = clean_text(text)
     print(f'i = {st.session_state.i}')
